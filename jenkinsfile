@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    tools {maven "maven"}
+    
     stages {
         stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/ASWINPRABUSIVA/webapp.git'
+                git url:'https://github.com/Ashwanth3637/Jerkins.git'
             }
         }
         stage('Build') {
@@ -15,15 +15,15 @@ pipeline {
         stage('build to images') {
             steps {
                 script {
-                    sh 'docker build -t aswinprabusiva/webapp1 .'
+                    sh 'docker build -t ashwanth3637/webapp1 .'
                 }
             }
         }
         stage('push to hub') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker_cred', toolName: 'docker', url: 'https://index.docker.io/v1/') {
-                              sh 'docker push aswinprabusiva/webapp1'
+                    withDockerRegistry(credentialsId: 'token', toolName: 'docker', url: 'https://index.docker.io/v1/') {
+                              sh 'docker push ashwanth3637/webapp1'
                     }
                 }
             }
